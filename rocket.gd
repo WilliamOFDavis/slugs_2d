@@ -1,9 +1,11 @@
 extends Node2D
 
-var velocity: Vector2 = Vector2(500,0)
+class_name Rocket
+
+var velocity: Vector2 = Vector2(0,300)
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	rotate(PI/2)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
