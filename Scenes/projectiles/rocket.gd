@@ -2,6 +2,7 @@ extends Node2D
 
 class_name Rocket
 
+@onready var explosion_component: ExplosionRadiusComponent = $ExplosionRadiusComponent
 var velocity: Vector2 = Vector2(0,300)
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -17,6 +18,5 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body.is_in_group("destructible"):
-		body.terrain_explosion($ExplosionRadius)
-		self.queue_free()
+	explosion_component.explode()
+	self.queue_free()

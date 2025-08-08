@@ -15,6 +15,9 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	pass
 
+func hit():
+	global_position = Vector2(0,-100)
+
 func _physics_process(_delta: float) -> void:
 	##$AnimatedSprite2D/RocketLauncher.look_at(get_global_mouse_position())
 	#if is_zooming_out:

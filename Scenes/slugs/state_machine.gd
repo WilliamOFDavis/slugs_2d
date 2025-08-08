@@ -8,6 +8,7 @@ func _ready() -> void:
 	add_state("walk")
 	add_state("idle")
 	add_state("in_air")
+	add_state("inactive")
 	call_deferred("set_state", states.idle)
 	
 func _state_logic(delta) -> void:
