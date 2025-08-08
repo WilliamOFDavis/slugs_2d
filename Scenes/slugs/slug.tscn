@@ -84,10 +84,11 @@ animation = &"walk"
 speed_scale = 2.0
 
 [node name="RocketLauncher" type="Sprite2D" parent="AnimatedSprite2D"]
-position = Vector2(5, 10.5)
-rotation = -0.628319
+position = Vector2(0, 10)
 texture = ExtResource("4_qqoxf")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 position = Vector2(0, 16)
 polygon = PackedVector2Array(15, -15, 16, 15, -19, 15, -3, 4, 0, -13)
+
+[node name="Camera2D" type="Camera2D" parent="."]
