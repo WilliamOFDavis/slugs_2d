@@ -1,29 +1,72 @@
-[gd_scene load_steps=14 format=3 uid="uid://b5vhx7wv1nesu"]
+[gd_scene load_steps=27 format=3 uid="uid://b5vhx7wv1nesu"]
 
 [ext_resource type="Script" uid="uid://bdpej2kfuy5pv" path="res://Scenes/slugs/slug.gd" id="1_f0h22"]
 [ext_resource type="Texture2D" uid="uid://dq1am2jl6abm" path="res://Graphics/slug_walk.png" id="1_piqcb"]
+[ext_resource type="Texture2D" uid="uid://8yh07tfelv0" path="res://Graphics/slug_idle.png" id="2_kq1qn"]
 [ext_resource type="Texture2D" uid="uid://o13ko2ii1c61" path="res://Graphics/slug_jump.png" id="2_lqw8j"]
-[ext_resource type="Texture2D" uid="uid://co01f0fyblng8" path="res://Graphics/RocketLauncher.png" id="4_qqoxf"]
+[ext_resource type="Script" uid="uid://bbhjp07u6ryqy" path="res://Scenes/slugs/state_machine.gd" id="4_qqoxf"]
+[ext_resource type="PackedScene" uid="uid://c6dhabdxnl0n7" path="res://components/input_component.tscn" id="6_bahlg"]
+[ext_resource type="PackedScene" uid="uid://b5id72leyiy8o" path="res://velocity_component.tscn" id="7_0eabb"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_lqw8j"]
-atlas = ExtResource("2_lqw8j")
+[sub_resource type="AtlasTexture" id="AtlasTexture_r26y6"]
+atlas = ExtResource("2_kq1qn")
 region = Rect2(0, 0, 16, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qqoxf"]
-atlas = ExtResource("2_lqw8j")
-region = Rect2(20, 0, 16, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_ya6xt"]
+atlas = ExtResource("2_kq1qn")
+region = Rect2(16, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vxr7y"]
+atlas = ExtResource("2_kq1qn")
+region = Rect2(32, 0, 16, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kq1qn"]
 atlas = ExtResource("2_lqw8j")
-region = Rect2(40, 0, 16, 32)
+region = Rect2(0, 0, 16, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_syic4"]
 atlas = ExtResource("2_lqw8j")
-region = Rect2(60, 0, 16, 32)
+region = Rect2(20, 0, 16, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bahlg"]
 atlas = ExtResource("2_lqw8j")
+region = Rect2(40, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jr6fx"]
+atlas = ExtResource("2_lqw8j")
+region = Rect2(60, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3yqec"]
+atlas = ExtResource("2_lqw8j")
 region = Rect2(80, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_impxr"]
+atlas = ExtResource("2_lqw8j")
+region = Rect2(100, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_76alq"]
+atlas = ExtResource("2_lqw8j")
+region = Rect2(120, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rvqpg"]
+atlas = ExtResource("2_lqw8j")
+region = Rect2(140, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qgqgd"]
+atlas = ExtResource("2_lqw8j")
+region = Rect2(160, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uy0no"]
+atlas = ExtResource("2_lqw8j")
+region = Rect2(180, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e0o4j"]
+atlas = ExtResource("2_lqw8j")
+region = Rect2(200, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_atgmu"]
+atlas = ExtResource("2_lqw8j")
+region = Rect2(220, 0, 16, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0eabb"]
 atlas = ExtResource("1_piqcb")
@@ -41,11 +84,19 @@ region = Rect2(40, 0, 16, 32)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_lqw8j")
+"texture": SubResource("AtlasTexture_r26y6")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_qqoxf")
+"texture": SubResource("AtlasTexture_ya6xt")
 }, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vxr7y")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 1.0
+}, {
+"frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_kq1qn")
 }, {
@@ -54,10 +105,37 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_bahlg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jr6fx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3yqec")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_impxr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_76alq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rvqpg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qgqgd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uy0no")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e0o4j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_atgmu")
 }],
 "loop": false,
-"name": &"jump",
-"speed": 7.0
+"name": &"in_air",
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -75,20 +153,30 @@ animations = [{
 }]
 
 [node name="Slug" type="CharacterBody2D"]
+floor_constant_speed = true
+floor_max_angle = 0.912807
 script = ExtResource("1_f0h22")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_kq1qn")
-animation = &"walk"
+animation = &"in_air"
+frame_progress = 1.0
 speed_scale = 2.0
 
-[node name="RocketLauncher" type="Sprite2D" parent="AnimatedSprite2D"]
-position = Vector2(0, 10)
-texture = ExtResource("4_qqoxf")
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="SlugStateMachine" type="Node" parent="." node_paths=PackedStringArray("sprite", "velocity_component")]
+script = ExtResource("4_qqoxf")
+sprite = NodePath("../AnimatedSprite2D")
+velocity_component = NodePath("../VelocityComponent")
+
+[node name="InputComponent" parent="." node_paths=PackedStringArray("velocity_component") instance=ExtResource("6_bahlg")]
+velocity_component = NodePath("../VelocityComponent")
+
+[node name="VelocityComponent" parent="." node_paths=PackedStringArray("slug_state_machine", "sprite") instance=ExtResource("7_0eabb")]
+slug_state_machine = NodePath("../SlugStateMachine")
+sprite = NodePath("../AnimatedSprite2D")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-position = Vector2(0, 16)
-polygon = PackedVector2Array(15, -15, 16, 15, -19, 15, -3, 4, 0, -13)
-
-[node name="Camera2D" type="Camera2D" parent="."]
+polygon = PackedVector2Array(-14, 30, 14, 30, 14, 2, 5, 2, 0, 6, -1, 20, -14, 26)
