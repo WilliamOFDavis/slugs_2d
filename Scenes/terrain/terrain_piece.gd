@@ -48,6 +48,7 @@ func terrain_explosion(explosion_radius: Node2D) -> void:
 				poly_local.append(point)
 			new_terrain.emit(poly_local, Vector2.ZERO, visual_polygon.color)
 	#visual_polygon.polygon = resultant_poly_local
+
 func set_visual_polygon(visual_poly: Polygon2D) -> void:
 	visual_polygon =  visual_poly
 	collision_polygon.polygon = visual_poly.polygon

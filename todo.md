@@ -1,10 +1,10 @@
 # Todo
 
 # Slug
-	Add slug state machines for moving and maybe shooting 
+	Has attribute currently_equipped_weapon which is 
 	Add inventory, resource array of weapon resources
 		Can access inventory on side panel
-		Panel persists but swaps inventory for active slug inventory
+		Panel persists but swaps inventory for active team inventory
 	Weapon
 		Texture
 		Projectile type
@@ -17,6 +17,5 @@
 	ExplosionComponent
 
 # Misc
-	Need some way of generalising explosion
-		Maybe explosion is Area2D, collects all intersecting regions and damages slugs
+	
 		 

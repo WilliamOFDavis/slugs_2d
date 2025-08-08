@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=4 format=3 uid="uid://dffauuu27g6ln"]
+
+[ext_resource type="Script" uid="uid://cevpbeit5hhbl" path="res://Resources/weapon.gd" id="1_jbc4h"]
+[ext_resource type="PackedScene" uid="uid://ccgpwyb4cbshp" path="res://Scenes/projectiles/rocket.tscn" id="1_kb3ho"]
+[ext_resource type="Texture2D" uid="uid://co01f0fyblng8" path="res://Graphics/RocketLauncher.png" id="3_2etf5"]
+
+[resource]
+script = ExtResource("1_jbc4h")
+name = "Rocket Launcher"
+weapon_texture = ExtResource("3_2etf5")
+projectile = ExtResource("1_kb3ho")
+projectile_count = 1
+projectile_release_delay = 0.0
+projectile_x_spread = 0.0
+aiming_method = 1
+max_ammo = 3
+metadata/_custom_type_script = "uid://cevpbeit5hhbl"

@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=4 format=3 uid="uid://c7bs1kdhaulv8"]
+
+[ext_resource type="PackedScene" uid="uid://bways6l6eigb8" path="res://Scenes/projectiles/bullet.tscn" id="1_1w08t"]
+[ext_resource type="Script" uid="uid://cevpbeit5hhbl" path="res://Resources/weapon.gd" id="1_bt336"]
+[ext_resource type="Texture2D" uid="uid://mm2l0ottji8q" path="res://Graphics/ak47.png" id="2_emtoc"]
+
+[resource]
+script = ExtResource("1_bt336")
+name = "AK47"
+weapon_texture = ExtResource("2_emtoc")
+projectile = ExtResource("1_1w08t")
+projectile_count = 1
+projectile_release_delay = 0.0
+projectile_x_spread = 0.0
+aiming_method = 0
+max_ammo = 20
+metadata/_custom_type_script = "uid://cevpbeit5hhbl"

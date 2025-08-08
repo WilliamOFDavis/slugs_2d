@@ -1,11 +1,10 @@
 extends Node2D
 
-class_name Rocket
 
 @onready var explosion_component: ExplosionRadiusComponent = $ExplosionRadiusComponent
-@export var speed: float = 200.0
+@export var speed: float = 700.0
 var direction: Vector2 = Vector2.ZERO
-var velocity: Vector2 = Vector2(300,0)
+var velocity: Vector2
 var shooter: Slug
 var gravity: float = 100.0
 # Called when the node enters the scene tree for the first time.
@@ -24,7 +23,8 @@ func set_direction(new_direction: Vector2) -> void:
 	direction = new_direction
 	velocity = direction * speed
 
-func _on_area_2d_body_entered(body: Node2D) -> void:
+
+func _on_collision_area_body_entered(body: Node2D) -> void:
 	if body != shooter:
 		explosion_component.explode()
 		self.queue_free()

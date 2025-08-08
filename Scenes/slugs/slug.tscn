@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://o13ko2ii1c61" path="res://Graphics/slug_jump.png" id="2_lqw8j"]
 [ext_resource type="Script" uid="uid://bbhjp07u6ryqy" path="res://Scenes/slugs/state_machine.gd" id="4_qqoxf"]
 [ext_resource type="PackedScene" uid="uid://c6dhabdxnl0n7" path="res://components/input_component.tscn" id="6_bahlg"]
-[ext_resource type="PackedScene" uid="uid://b5id72leyiy8o" path="res://velocity_component.tscn" id="7_0eabb"]
+[ext_resource type="PackedScene" uid="uid://b5id72leyiy8o" path="res://components/velocity_component.tscn" id="7_0eabb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r26y6"]
 atlas = ExtResource("2_kq1qn")
@@ -166,13 +166,15 @@ speed_scale = 2.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="SlugStateMachine" type="Node" parent="." node_paths=PackedStringArray("sprite", "velocity_component")]
+[node name="SlugStateMachine" type="Node" parent="." node_paths=PackedStringArray("sprite", "velocity_component", "airborne_timer")]
 script = ExtResource("4_qqoxf")
 sprite = NodePath("../AnimatedSprite2D")
 velocity_component = NodePath("../VelocityComponent")
+airborne_timer = NodePath("../AirborneTimer")
 
-[node name="InputComponent" parent="." node_paths=PackedStringArray("velocity_component") instance=ExtResource("6_bahlg")]
+[node name="InputComponent" parent="." node_paths=PackedStringArray("velocity_component", "sprite") instance=ExtResource("6_bahlg")]
 velocity_component = NodePath("../VelocityComponent")
+sprite = NodePath("../AnimatedSprite2D")
 
 [node name="VelocityComponent" parent="." node_paths=PackedStringArray("slug_state_machine", "sprite") instance=ExtResource("7_0eabb")]
 slug_state_machine = NodePath("../SlugStateMachine")
@@ -180,3 +182,10 @@ sprite = NodePath("../AnimatedSprite2D")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-14, 30, 14, 30, 14, 2, 5, 2, 0, 6, -1, 20, -14, 26)
+
+[node name="WeaponSprite" type="Sprite2D" parent="."]
+position = Vector2(0, 16)
+
+[node name="AirborneTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
