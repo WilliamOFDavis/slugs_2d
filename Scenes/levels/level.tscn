@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://bmsyehs374dvv"]
+
+[ext_resource type="Script" uid="uid://xq7qmrt5syrd" path="res://Scenes/levels/level.gd" id="1_u52ul"]
+[ext_resource type="PackedScene" uid="uid://b5vhx7wv1nesu" path="res://Scenes/slugs/slug.tscn" id="3_d6e32"]
+[ext_resource type="PackedScene" uid="uid://bkypmtjpte0d4" path="res://Scenes/terrain/terrain_piece.tscn" id="3_oi3di"]
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_u52ul")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.7, 0.7)
+
+[node name="Projectiles" type="Node2D" parent="."]
+
+[node name="Terrain" type="Node2D" parent="."]
+
+[node name="TerrainPiece" parent="Terrain" node_paths=PackedStringArray("visual_polygon") instance=ExtResource("3_oi3di")]
+visual_polygon = NodePath("TerrainPoly")
+
+[node name="TerrainPoly" type="Polygon2D" parent="Terrain/TerrainPiece"]
+color = Color(0.763743, 0.64334, 0.235081, 1)
+polygon = PackedVector2Array(-1642, -5, -1647, 668, 1649, 714, 1649, -193, 1298, 0, 898, 125, 750, 132, 553, 218, 351, 298, 143, 270, -285, 192, -495, 112, -711, 154, -874, 75)
+
+[node name="Slug" parent="." instance=ExtResource("3_d6e32")]

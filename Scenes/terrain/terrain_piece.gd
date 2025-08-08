@@ -7,10 +7,9 @@ class_name TerrainPiece
 
 var collision_polygon: CollisionPolygon2D = CollisionPolygon2D.new()
 
-signal new_terrain(visual_poly, new_pos)
+signal new_terrain(visual_poly, new_pos, color)
 
 func _ready() -> void:
-	collision_polygon 
 	collision_polygon.polygon = visual_polygon.polygon
 	call_deferred("add_child",collision_polygon)
 
@@ -37,7 +36,7 @@ func terrain_explosion(explosion_radius: Polygon2D) -> void:
 			var poly_local = []
 			for point in poly:
 				poly_local.append(point)
-			new_terrain.emit(poly_local, Vector2.ZERO)
+			new_terrain.emit(poly_local, Vector2.ZERO, visual_polygon.color)
 	#visual_polygon.polygon = resultant_poly_local
 	visual_polygon.set_deferred("polygon", resultant_poly_local)
 	collision_polygon.set_deferred("polygon", resultant_poly_local)
@@ -46,3 +45,6 @@ func set_visual_polygon(visual_poly: Polygon2D) -> void:
 	visual_polygon =  visual_poly
 	collision_polygon.polygon = visual_poly.polygon
 	call_deferred("add_child", visual_polygon)
+
+func set_color(poly_color: Color) -> void:
+	visual_polygon.color = poly_color
