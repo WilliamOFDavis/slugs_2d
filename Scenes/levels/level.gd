@@ -11,7 +11,7 @@ func _ready() -> void:
 	for piece in terrain.get_children():
 		piece.connect("new_terrain", spawn_new_terrain)
 	for slug: Slug in  $Slugs.get_children():
-		slug.set_current_weapon(inventory_array[0])
+		slug.set_inventory(inventory_array)
 		slug.connect("shoot_projectile", spawn_projectile)
 	
 func _process(_delta: float) -> void:
@@ -30,7 +30,7 @@ func spawn_rocket(spawn_pos: Vector2) -> void:
 
 func spawn_projectile(projectile: PackedScene, start_position: Vector2, direction: Vector2, shooter: Slug):
 	var new_projectile: Node2D = projectile.instantiate()
-	new_projectile.global_position = start_position + 10*direction
+	new_projectile.global_position = start_position + 20*direction
 	new_projectile.set_direction(direction)
 	new_projectile.set_shooter(shooter)
 	$Projectiles.add_child(new_projectile)
