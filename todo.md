@@ -14,7 +14,7 @@
 	VelocityComponent
 	DamageComponent
 	ExplosionComponent
-
+	Add hold-down charge for shots, then increase speed of projectile with higher charge
 # Misc
 	Add new spawning logic to Level for airstrikes
 	Teams and worm teams

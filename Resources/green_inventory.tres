@@ -1,11 +1,12 @@
-[gd_resource type="Resource" script_class="Inventory" load_steps=5 format=3 uid="uid://dh0csmytbue0y"]
+[gd_resource type="Resource" script_class="Inventory" load_steps=6 format=3 uid="uid://dh0csmytbue0y"]
 
 [ext_resource type="Script" uid="uid://bb1rxy30vmqei" path="res://Resources/inventory.gd" id="1_1xcnw"]
 [ext_resource type="Script" uid="uid://cevpbeit5hhbl" path="res://Resources/weapon.gd" id="2_yvmwt"]
 [ext_resource type="Resource" uid="uid://dffauuu27g6ln" path="res://Resources/rocket_launcher.tres" id="3_yvmwt"]
 [ext_resource type="Resource" uid="uid://c7bs1kdhaulv8" path="res://Resources/ak47.tres" id="4_ou56e"]
+[ext_resource type="Resource" uid="uid://b2ojymojs5i30" path="res://Resources/grenade.tres" id="5_vlisp"]
 
 [resource]
 script = ExtResource("1_1xcnw")
-weapons = Array[ExtResource("2_yvmwt")]([ExtResource("3_yvmwt"), ExtResource("4_ou56e")])
+weapons = Array[ExtResource("2_yvmwt")]([ExtResource("3_yvmwt"), ExtResource("4_ou56e"), ExtResource("5_vlisp")])
 metadata/_custom_type_script = "uid://bb1rxy30vmqei"

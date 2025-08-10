@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://b5vhx7wv1nesu"]
+[gd_scene load_steps=29 format=3 uid="uid://b5vhx7wv1nesu"]
 
 [ext_resource type="Script" uid="uid://bdpej2kfuy5pv" path="res://Scenes/slugs/slug.gd" id="1_f0h22"]
 [ext_resource type="Texture2D" uid="uid://dq1am2jl6abm" path="res://Graphics/slug_walk.png" id="1_piqcb"]
@@ -8,7 +8,6 @@
 [ext_resource type="Script" uid="uid://cnvkfq48r7eff" path="res://Scenes/slugs/camera_2d.gd" id="5_2reqc"]
 [ext_resource type="PackedScene" uid="uid://c6dhabdxnl0n7" path="res://components/input_component.tscn" id="6_bahlg"]
 [ext_resource type="PackedScene" uid="uid://b5id72leyiy8o" path="res://components/velocity_component.tscn" id="7_0eabb"]
-[ext_resource type="Texture2D" uid="uid://mm2l0ottji8q" path="res://Graphics/ak47.png" id="8_y0dos"]
 [ext_resource type="Script" uid="uid://c382ophhlvgsn" path="res://Scenes/slugs/weapon_sprite.gd" id="9_2reqc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r26y6"]
@@ -192,7 +191,6 @@ polygon = PackedVector2Array(-14, 30, 14, 30, 14, 2, 5, 2, 0, 6, -1, 20, -14, 26
 
 [node name="WeaponSprite" type="Sprite2D" parent="."]
 position = Vector2(0, 16)
-texture = ExtResource("8_y0dos")
 script = ExtResource("9_2reqc")
 
 [node name="AirborneTimer" type="Timer" parent="."]

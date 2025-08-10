@@ -16,7 +16,7 @@ visual_polygon = NodePath("Polygon2D")
 
 [node name="Polygon2D" type="Polygon2D" parent="Terrain/TerrainPiece2"]
 color = Color(1, 0.396078, 0, 1)
-polygon = PackedVector2Array(609, -1116, 771, -517, 1147, -399, 1470, -559, 1633, -1117)
+polygon = PackedVector2Array(626, -659, 771, -517, 1147, -399, 1470, -559, 1565, -657)
 
 [node name="TerrainPiece" parent="Terrain" node_paths=PackedStringArray("visual_polygon") instance=ExtResource("3_oi3di")]
 visual_polygon = NodePath("TerrainPoly")
@@ -29,4 +29,4 @@ polygon = PackedVector2Array(-1642, -5, -1647, 668, 1649, 714, 1658, -3, 633, -2
 [node name="Slugs" type="Node2D" parent="."]
 
 [node name="Slug" parent="Slugs" instance=ExtResource("3_d6e32")]
-position = Vector2(1141, -1161)
+position = Vector2(1105, -705)

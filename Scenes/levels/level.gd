@@ -11,17 +11,13 @@ func _ready() -> void:
 	for piece in terrain.get_children():
 		piece.connect("new_terrain", spawn_new_terrain)
 	for slug: Slug in  $Slugs.get_children():
+		if slug.name == "Slug":
+			slug.begin_turn()
 		slug.set_inventory(inventory_array)
 		slug.connect("shoot_projectile", spawn_projectile)
 	
 func _process(_delta: float) -> void:
 	pass
-
-func _unhandled_input(event: InputEvent) -> void:
-	if event is  InputEventMouse:
-		if event.button_mask == MOUSE_BUTTON_LEFT and event.is_pressed():
-			#spawn_rocket(get_global_mouse_position())
-			pass
 
 func spawn_rocket(spawn_pos: Vector2) -> void:
 	var rocket: Rocket = rocket_scene.instantiate()
@@ -31,8 +27,11 @@ func spawn_rocket(spawn_pos: Vector2) -> void:
 func spawn_projectile(projectile: PackedScene, start_position: Vector2, direction: Vector2, shooter: Slug):
 	var new_projectile: Node2D = projectile.instantiate()
 	new_projectile.global_position = start_position + 20*direction
-	new_projectile.set_direction(direction)
-	new_projectile.set_shooter(shooter)
+	if new_projectile is RigidBody2D:
+		new_projectile.set_initial_force(direction)
+	else:
+		new_projectile.set_direction(direction)
+		new_projectile.set_shooter(shooter)
 	$Projectiles.add_child(new_projectile)
 
 func spawn_new_terrain(visual_poly: Array, _new_position: Vector2, terrain_color: Color) -> void:
