@@ -11,9 +11,9 @@ class_name VelocityComponent
 @export var velocity: Vector2
 @export var direction: Vector2 = Vector2.ZERO
 
-var knockback_force: float =  500.0
+var knockback_force: float = 300.0  
 var knockback_velocity: Vector2
-
+var knockback_decay: float = 0.15  
 
 func set_x_direction(axis: float) -> void:
 	direction.x = axis
@@ -21,9 +21,9 @@ func set_x_direction(axis: float) -> void:
 		sprite.flip_h = false
 	elif direction.x == -1:
 		sprite.flip_h = true
-	if knockback_velocity.length() < 50:  
+	
+	if knockback_velocity.length() < 20:  
 		velocity.x = speed * axis
-
 
 func set_y_velocity(vel: float) -> void:
 	velocity.y = vel
@@ -32,23 +32,29 @@ func get_velocity() -> Vector2:
 	return velocity
 
 func is_moving() -> bool:
-	if velocity == Vector2.ZERO:
-		return false
-	else:
-		return true
+	return velocity != Vector2.ZERO
 
 func _physics_process(delta: float) -> void:
+	# Handle gravity
 	if parent is Slug:
 		if slug_state_machine.get_state() == slug_state_machine.get_states().in_air:
-			velocity.y += gravity*delta
+			velocity.y += gravity * delta
 		else:
 			velocity.y = 0.0
-	velocity = velocity + knockback_velocity
-	knockback_velocity = lerp(knockback_velocity,Vector2.ZERO,0.2)
+	
+	if knockback_velocity.length() > 5:  
+		velocity = knockback_velocity
+	
+	knockback_velocity = knockback_velocity.lerp(Vector2.ZERO, knockback_decay)
+	
+	if velocity.x > 0:
+		print("Velocity: ", velocity, " Knockback: ", knockback_velocity)
 
 func knock_back(knockback_direction: Vector2) -> void:
+	if knockback_direction.length() > 0:
+		knockback_direction = knockback_direction.normalized()
+	
 	knockback_velocity = knockback_direction * knockback_force
-	knockback_velocity.y = min(knockback_velocity.y, 200) 
-
+	
 func cancel_knock_back() -> void:
 	knockback_velocity = Vector2.ZERO

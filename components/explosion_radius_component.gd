@@ -5,6 +5,8 @@ class_name ExplosionRadiusComponent
 var explosion_radius: CollisionPolygon2D
 var bodies_in_range: Array[Node2D] = []
 var shooter: Slug
+@export var damage: int = 50
+
 
 func _ready() -> void:
 	explosion_radius = get_node("ExplosionRadius")
@@ -27,4 +29,5 @@ func explode() -> void:
 			if body is TerrainPiece:
 				body.terrain_explosion(explosion_radius)
 			elif body is Slug:
-				body.hit()
+				var direction_to_body: Vector2 = ( get_parent().global_position - body.global_position).normalized()
+				body.hit(damage, direction_to_body)

@@ -32,3 +32,5 @@ func _unhandled_input(event: InputEvent) -> void:
 		
 		if Input.is_action_just_pressed("switch_weapon"):
 			switch_weapon.emit()
+	else:
+		velocity_component.set_x_direction(0.0)

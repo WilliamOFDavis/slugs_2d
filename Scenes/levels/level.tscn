@@ -30,3 +30,18 @@ polygon = PackedVector2Array(-1642, -5, -1647, 668, 1649, 714, 1658, -3, 633, -2
 
 [node name="Slug" parent="Slugs" instance=ExtResource("3_d6e32")]
 position = Vector2(1105, -705)
+
+[node name="Slug3" parent="Slugs" instance=ExtResource("3_d6e32")]
+position = Vector2(79, -151)
+
+[node name="Slug4" parent="Slugs" instance=ExtResource("3_d6e32")]
+position = Vector2(-263, -151)
+
+[node name="Slug5" parent="Slugs" instance=ExtResource("3_d6e32")]
+position = Vector2(-556, -151)
+
+[node name="Slug6" parent="Slugs" instance=ExtResource("3_d6e32")]
+position = Vector2(-1028, -111)
+
+[node name="Slug2" parent="Slugs" instance=ExtResource("3_d6e32")]
+position = Vector2(1351, -701)

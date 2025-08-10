@@ -11,6 +11,13 @@ var current_weapon: Weapon
 var current_inventory: Array[Weapon]
 var weapon_index: int = 0
 var active_turn: bool = false
+var health: int = 100: 
+	set(new_health):
+		if new_health <= 0: 
+			health = 100
+			death()
+		else:
+			health = new_health
 @onready var velocity_component: VelocityComponent = $VelocityComponent
 # Called when the node enters the scene tree for the first time.
 
@@ -46,18 +53,19 @@ func show_weapon() -> void:
 	$WeaponSprite.visible = true
 
 func shoot_weap(direction_to_mouse: Vector2) -> void:
-	print("Player: shoot_weapon called")
 	if current_weapon != null:
-		print("Player: Emitting shoot_projectile signal")
 		shoot_projectile.emit(current_weapon.projectile, global_position, direction_to_mouse, self)
 
-func hit():
-	pass
+func hit(damage:int = 0, knockback_direction: Vector2 = Vector2.ZERO):
+	health -= damage
+	
+func death() -> void:
+	position = Vector2(0,-1000)
 
 func _physics_process(_delta: float) -> void:
 	velocity = velocity_component.get_velocity()
 	move_and_slide()
-
+	
 
 func _on_input_component_switch_weapon() -> void:
 	switch_weapon()
