@@ -58,6 +58,7 @@ func shoot_weap(direction_to_mouse: Vector2) -> void:
 
 func hit(damage:int = 0, knockback_direction: Vector2 = Vector2.ZERO):
 	health -= damage
+	velocity_component.knock_back(knockback_direction)
 	
 func death() -> void:
 	position = Vector2(0,-1000)

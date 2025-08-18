@@ -1,7 +1,7 @@
 extends Node2D
 
 @export var velocity_component: VelocityComponent
-@export var jump_impulse: float = -200.0
+@export var jump_impulse: float = -300.0
 @export var sprite: AnimatedSprite2D 
 @export var weapon_sprite: Sprite2D
 @export var camera: Camera2D

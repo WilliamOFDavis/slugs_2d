@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dpunkf387mlng" path="res://components/explosion_radius_component.tscn" id="3_p8wnb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_abbnw"]
-size = Vector2(2, 2)
+size = Vector2(16, 16)
 
 [node name="Bullet" type="Node2D"]
 script = ExtResource("1_3eg0b")

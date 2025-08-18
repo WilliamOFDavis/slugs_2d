@@ -29,5 +29,5 @@ func explode() -> void:
 			if body is TerrainPiece:
 				body.terrain_explosion(explosion_radius)
 			elif body is Slug:
-				var direction_to_body: Vector2 = ( get_parent().global_position - body.global_position).normalized()
+				var direction_to_body: Vector2 = ( body.global_position -  get_parent().global_position).normalized()
 				body.hit(damage, direction_to_body)

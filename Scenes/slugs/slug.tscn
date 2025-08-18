@@ -163,6 +163,7 @@ script = ExtResource("1_f0h22")
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_kq1qn")
 animation = &"in_air"
+frame = 11
 frame_progress = 1.0
 speed_scale = 2.0
 
