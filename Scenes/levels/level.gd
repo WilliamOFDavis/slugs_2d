@@ -5,7 +5,7 @@ var terrain_piece_scene = preload("res://Scenes/terrain/terrain_piece.tscn")
 var inventory_resource: Inventory = preload("res://Resources/green_inventory.tres")
 var inventory_array: Array[Weapon]
 var active_slug: Slug
-var active_team
+var active_team_index: int = 0
 var teams: Array[Team] = [
 	preload("res://Resources/green_team.tres"),
 	preload("res://Resources/blue_team.tres")
@@ -30,7 +30,8 @@ func _ready() -> void:
 		#slug.connect("shoot_projectile", spawn_projectile)
 
 func _process(_delta: float) -> void:
-	pass
+	if Input.is_action_just_pressed("end_turn"):
+		goto_next_turn()
 
 func initialise_teams() -> void:
 	for team in teams:
@@ -43,8 +44,16 @@ func initialise_teams() -> void:
 			slug.set_team(team)
 			team.add_slug(slug)
 			$Slugs.add_child(slug)
-	active_slug = teams[0].slugs[0]
+	active_slug = teams[0].get_next_slug()
+	active_team_index += 1
 	active_slug.begin_turn()
+
+func goto_next_turn() -> void:
+	if active_slug != null:
+		active_slug.end_turn()
+	active_slug = teams[active_team_index%teams.size()].get_next_slug()
+	active_slug.begin_turn()
+	active_team_index += 1
 
 func spawn_rocket(spawn_pos: Vector2) -> void:
 	var rocket: Rocket = rocket_scene.instantiate()

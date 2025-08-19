@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("1_kxc1t")
 team_name = "Blue"
-team_color = Color(0, 0.639216, 1, 1)
+team_color = Color(0.908172, 0.467618, 0.312828, 1)
 team_inventory = ExtResource("2_n4c8d")
 metadata/_custom_type_script = "uid://by7syyhtd4gnb"

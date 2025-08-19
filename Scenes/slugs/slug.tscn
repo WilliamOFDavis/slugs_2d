@@ -178,7 +178,8 @@ speed_scale = 2.0
 [node name="Camera2D" type="Camera2D" parent="."]
 enabled = false
 script = ExtResource("5_2reqc")
-zoomed_scale = Vector2(1.2, 1.2)
+zoomed_scale = Vector2(2, 2)
+zoomed_out_scale = Vector2(1, 1)
 
 [node name="SlugStateMachine" type="Node" parent="." node_paths=PackedStringArray("sprite", "velocity_component", "airborne_timer")]
 script = ExtResource("4_qqoxf")

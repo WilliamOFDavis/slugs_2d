@@ -18,3 +18,8 @@ func add_slug(slug: Slug) -> void:
 func remove_slug(slug: Slug) -> void:
 	slugs.erase(slug)
 	slug_index -= 1
+
+func get_next_slug() -> Slug:
+	var next_slug: Slug = slugs[slug_index%slugs.size()]
+	slug_index += 1
+	return next_slug
