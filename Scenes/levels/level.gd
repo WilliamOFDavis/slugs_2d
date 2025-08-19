@@ -21,8 +21,8 @@ func _ready() -> void:
 	initialise_teams()
 	#inventory_resource.initialise_inventory()
 	#inventory_array = inventory_resource.get_inventory()
-	#for piece in terrain.get_children():
-		#piece.connect("new_terrain", spawn_new_terrain)
+	for piece in terrain.get_children():
+		piece.connect("new_terrain", spawn_new_terrain)
 	#for slug: Slug in  $Slugs.get_children():
 		#if slug.name == "Slug":
 			#slug.begin_turn()
@@ -60,13 +60,13 @@ func spawn_rocket(spawn_pos: Vector2) -> void:
 	rocket.global_position = spawn_pos
 	$Projectiles.add_child(rocket)
 
-func spawn_projectile(projectile: PackedScene, start_position: Vector2, direction: Vector2, shooter: Slug):
+func spawn_projectile(projectile: PackedScene, start_position: Vector2, direction: Vector2, shooter: Slug, multiplier: float = 1.0):
 	var new_projectile: Node2D = projectile.instantiate()
-	new_projectile.global_position = start_position + 20*direction
+	new_projectile.global_position = start_position + 10*direction
 	if new_projectile is RigidBody2D:
-		new_projectile.set_initial_force(direction)
+		new_projectile.set_initial_force(direction, multiplier)
 	else:
-		new_projectile.set_direction(direction)
+		new_projectile.set_direction(direction, multiplier)
 	new_projectile.set_shooter(shooter)
 	$Projectiles.add_child(new_projectile)
 

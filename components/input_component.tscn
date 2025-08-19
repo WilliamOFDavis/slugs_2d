@@ -4,3 +4,4 @@
 
 [node name="InputComponent" type="Node2D"]
 script = ExtResource("1_x3vdm")
+max_multiplier = 2.5

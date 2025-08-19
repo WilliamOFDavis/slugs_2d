@@ -73,9 +73,9 @@ func hide_weapon() -> void:
 func show_weapon() -> void:
 	$WeaponSprite.visible = true
 
-func shoot_weap(direction_to_mouse: Vector2) -> void:
+func shoot_weap(direction_to_mouse: Vector2, multiplier: float) -> void:
 	if current_weapon != null and current_weapon.current_ammo > 0:
-		shoot_projectile.emit(current_weapon.projectile, global_position, direction_to_mouse, self)
+		shoot_projectile.emit(current_weapon.projectile, global_position, direction_to_mouse, self, multiplier)
 		current_weapon.decrement_ammo()
 	if current_weapon != null and current_weapon.current_ammo <= 0:
 		hide_weapon()

@@ -7,6 +7,7 @@ var direction: Vector2 = Vector2.ZERO
 var velocity: Vector2
 var shooter: Slug
 var gravity: float = 100.0
+var force_multiplier: float = 1.0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	rotate(PI/2)
@@ -19,9 +20,12 @@ func _physics_process(delta: float) -> void:
 func set_shooter(slug:Slug) -> void:
 	shooter = slug
 	
-func set_direction(new_direction: Vector2) -> void:
+func set_direction(new_direction: Vector2, multiplier: float = 1.0) -> void:
 	direction = new_direction
 	velocity = direction * speed
+
+func set_force_multiplier(multiplier: float) -> void:
+	force_multiplier = multiplier
 
 
 func _on_collision_area_body_entered(body: Node2D) -> void:

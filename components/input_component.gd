@@ -5,8 +5,14 @@ extends Node2D
 @export var sprite: AnimatedSprite2D 
 @export var weapon_sprite: Sprite2D
 @export var camera: Camera2D
+@export var max_multiplier: float = 10.0
+@export var mult_label: Label
+@export var charge_per_second: float = 1.0
 
-signal shoot_weapon(direction)
+var input_multiplier: float = 1.0
+var is_charging: bool = false
+
+signal shoot_weapon(direction, multiplier)
 signal switch_weapon
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -23,14 +29,31 @@ func _unhandled_input(event: InputEvent) -> void:
 			sprite.play("in_air")
 			velocity_component.set_y_velocity(jump_impulse)
 		
-		if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed and get_parent().is_on_floor():
-			var direction_to_mouse: Vector2 = (get_global_mouse_position() - get_parent().global_position).normalized()
-			shoot_weapon.emit(direction_to_mouse)
-			get_viewport().set_input_as_handled()
+		#if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed() and get_parent().is_on_floor():
+			#var direction_to_mouse: Vector2 = (get_global_mouse_position() - get_parent().global_position).normalized()
+			#shoot_weapon.emit(direction_to_mouse, 1.0)
+			#get_viewport().set_input_as_handled()
+			#return
+		#
+		#if Input.is_action_just_pressed("left_mouse") and get_parent().is_on_floor():
+		if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed() and get_parent().is_on_floor():
+			is_charging = true
 			return
-
+		
+		#if Input.is_action_just_released("left_mouse"):
+		if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.is_released() and get_parent().is_on_floor():
+			var direction_to_mouse: Vector2 = (get_global_mouse_position() - get_parent().global_position).normalized()
+			is_charging = false
+			shoot_weapon.emit(direction_to_mouse, input_multiplier)
+			input_multiplier = 1.0
+			return
 		
 		if Input.is_action_just_pressed("switch_weapon"):
 			switch_weapon.emit()
 	else:
 		velocity_component.set_x_direction(0.0)
+
+func _physics_process(delta: float) -> void:
+	if is_charging and input_multiplier < max_multiplier: 
+		input_multiplier += charge_per_second * delta
+	mult_label.text = str(snapped(input_multiplier, 0.1))

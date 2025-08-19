@@ -13,5 +13,6 @@ projectile_count = 1
 projectile_release_delay = 0.0
 projectile_x_spread = 0.0
 aiming_method = 1
-max_ammo = 3
+weapon_type = 0
+max_ammo = 20
 metadata/_custom_type_script = "uid://cevpbeit5hhbl"

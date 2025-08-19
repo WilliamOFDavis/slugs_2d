@@ -19,5 +19,6 @@ var current_ammo: int
 func _init() -> void:
 	current_ammo = max_ammo
 
+
 func decrement_ammo() -> void:
 	current_ammo -= 1
