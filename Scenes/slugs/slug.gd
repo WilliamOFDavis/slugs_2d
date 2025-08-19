@@ -42,6 +42,9 @@ func activate_slug() -> void:
 
 func deactivate_slug() -> void:
 	active_turn = false
+
+
+func deactivate_camera() -> void:
 	camera.enabled = false
 
 func begin_turn() -> void:
@@ -49,7 +52,6 @@ func begin_turn() -> void:
 
 func end_turn() -> void:
 	deactivate_slug()
-	turn_over.emit()
 
 func set_inventory(inventory: Inventory) -> void:
 	current_inventory = inventory

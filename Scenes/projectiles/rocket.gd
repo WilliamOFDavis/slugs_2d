@@ -3,7 +3,7 @@ extends Node2D
 class_name Rocket
 
 @onready var explosion_component: ExplosionRadiusComponent = $ExplosionRadiusComponent
-@export var speed: float = 100.0
+@export var speed: float = 120.0
 var direction: Vector2 = Vector2.ZERO
 var velocity: Vector2
 var shooter: Slug

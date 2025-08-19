@@ -179,7 +179,6 @@ speed_scale = 2.0
 enabled = false
 script = ExtResource("5_2reqc")
 zoomed_scale = Vector2(2, 2)
-zoomed_out_scale = Vector2(1, 1)
 
 [node name="SlugStateMachine" type="Node" parent="." node_paths=PackedStringArray("sprite", "velocity_component", "airborne_timer")]
 script = ExtResource("4_qqoxf")
@@ -223,5 +222,9 @@ offset_top = -25.0
 offset_right = 20.0
 offset_bottom = -2.0
 text = "1.0"
+
+[node name="EndTurnTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
 
 [connection signal="switch_weapon" from="InputComponent" to="." method="_on_input_component_switch_weapon"]

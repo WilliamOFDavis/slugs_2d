@@ -23,20 +23,20 @@ visual_polygon = NodePath("TerrainPoly")
 [node name="TerrainPoly" type="Polygon2D" parent="Terrain/TerrainPiece"]
 position = Vector2(43, -4)
 color = Color(0.763743, 0.64334, 0.235081, 1)
-polygon = PackedVector2Array(-1642, -5, -1647, 668, 1649, 714, 1658, -3, 633, -259, 196, -3)
+polygon = PackedVector2Array(-31, 1, -42, 711, 1649, 714, 1658, -3, 633, -259, 196, -3)
 
 [node name="Slugs" type="Node2D" parent="."]
 
 [node name="GreenSpawnPoints" type="Node2D" parent="."]
 
 [node name="Marker2D" type="Marker2D" parent="GreenSpawnPoints"]
-position = Vector2(-1338, -37)
+position = Vector2(975, -280)
 
 [node name="Marker2D2" type="Marker2D" parent="GreenSpawnPoints"]
 position = Vector2(1247, -148)
 
 [node name="Marker2D3" type="Marker2D" parent="GreenSpawnPoints"]
-position = Vector2(-859, -20)
+position = Vector2(1112, -206)
 
 [node name="Marker2D4" type="Marker2D" parent="GreenSpawnPoints"]
 position = Vector2(893, -676)
@@ -53,10 +53,15 @@ position = Vector2(739, -676)
 position = Vector2(1153, -682)
 
 [node name="Marker2D8" type="Marker2D" parent="RedSpawnPoints"]
-position = Vector2(-396, -43)
+position = Vector2(1431, -692)
 
 [node name="Marker2D9" type="Marker2D" parent="RedSpawnPoints"]
-position = Vector2(-1041, -31)
+position = Vector2(129, -23)
 
 [node name="Marker2D10" type="Marker2D" parent="RedSpawnPoints"]
 position = Vector2(1592, -71)
+
+[node name="EndTurnTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="EndTurnTimer" to="." method="goto_next_turn"]

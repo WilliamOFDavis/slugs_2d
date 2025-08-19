@@ -21,8 +21,6 @@ func _body_entered(body:Node2D) -> void:
 func _body_exited(body:Node2D) -> void:
 	if body != shooter:
 		bodies_in_range.erase(body)
-	if body is Slug:
-		pass
 func explode() -> void:
 	for body in bodies_in_range:
 		if body != null:

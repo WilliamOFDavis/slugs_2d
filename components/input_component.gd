@@ -16,14 +16,15 @@ signal shoot_weapon(direction, multiplier)
 signal switch_weapon
 
 func _unhandled_input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed("right_mouse"):
+			camera.toggle_zoom()
 	if get_parent().active_turn:
 		var x_direction: float = Input.get_axis("move_left", "move_right")
 		
 		weapon_sprite.look_at(get_global_mouse_position())
 		velocity_component.set_x_direction(x_direction)
 		
-		if Input.is_action_just_pressed("right_mouse"):
-			camera.toggle_zoom()
+		
 		
 		if Input.is_action_just_pressed("jump") and get_parent().is_on_floor():
 			sprite.play("in_air")
@@ -36,12 +37,14 @@ func _unhandled_input(event: InputEvent) -> void:
 			#return
 		#
 		#if Input.is_action_just_pressed("left_mouse") and get_parent().is_on_floor():
-		if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed() and get_parent().is_on_floor():
+		if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed() and get_parent().is_on_floor() and is_charging == false:
 			is_charging = true
 			return
 		
+		
+		
 		#if Input.is_action_just_released("left_mouse"):
-		if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.is_released() and get_parent().is_on_floor():
+		if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.is_released() and get_parent().is_on_floor() and is_charging:
 			var direction_to_mouse: Vector2 = (get_global_mouse_position() - get_parent().global_position).normalized()
 			is_charging = false
 			shoot_weapon.emit(direction_to_mouse, input_multiplier)
@@ -56,4 +59,7 @@ func _unhandled_input(event: InputEvent) -> void:
 func _physics_process(delta: float) -> void:
 	if is_charging and input_multiplier < max_multiplier: 
 		input_multiplier += charge_per_second * delta
+	if !get_parent().is_on_floor() and is_charging:
+			is_charging = false
+			input_multiplier = 1.0
 	mult_label.text = str(snapped(input_multiplier, 0.1))

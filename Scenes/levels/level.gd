@@ -31,7 +31,7 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("end_turn"):
-		goto_next_turn()
+		end_turn(true)
 
 func initialise_teams() -> void:
 	for team in teams:
@@ -48,12 +48,19 @@ func initialise_teams() -> void:
 	active_team_index += 1
 	active_slug.begin_turn()
 
-func goto_next_turn() -> void:
+func end_turn(triggered:bool = false) -> void:
 	if active_slug != null:
 		active_slug.end_turn()
+	if !triggered:
+		$EndTurnTimer.start()
+	else:
+		goto_next_turn()
+func goto_next_turn() -> void:
+	active_slug.deactivate_camera()
 	active_slug = teams[active_team_index%teams.size()].get_next_slug()
 	active_slug.begin_turn()
 	active_team_index += 1
+	$EndTurnTimer.wait_time = 1.0
 
 func spawn_rocket(spawn_pos: Vector2) -> void:
 	var rocket: Rocket = rocket_scene.instantiate()
@@ -69,6 +76,8 @@ func spawn_projectile(projectile: PackedScene, start_position: Vector2, directio
 		new_projectile.set_direction(direction, multiplier)
 	new_projectile.set_shooter(shooter)
 	$Projectiles.add_child(new_projectile)
+	$EndTurnTimer.wait_time = 2.5*multiplier
+	end_turn()
 
 func spawn_new_terrain(visual_poly: Array, _new_position: Vector2, terrain_color: Color) -> void:
 	var new_visual_polygon: Polygon2D = Polygon2D.new()
