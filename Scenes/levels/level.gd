@@ -4,20 +4,47 @@ var rocket_scene = preload("res://Scenes/projectiles/rocket.tscn")
 var terrain_piece_scene = preload("res://Scenes/terrain/terrain_piece.tscn")
 var inventory_resource: Inventory = preload("res://Resources/green_inventory.tres")
 var inventory_array: Array[Weapon]
+var active_slug: Slug
+var active_team
+var teams: Array[Team] = [
+	preload("res://Resources/green_team.tres"),
+	preload("res://Resources/blue_team.tres")
+]
+var slug_scene: PackedScene = preload("res://Scenes/slugs/slug.tscn")
+
+@export var slugs_per_team: int = 5
 @onready var terrain = $Terrain
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	inventory_array = inventory_resource.get_inventory()
-	for piece in terrain.get_children():
-		piece.connect("new_terrain", spawn_new_terrain)
-	for slug: Slug in  $Slugs.get_children():
-		if slug.name == "Slug":
-			slug.begin_turn()
-		slug.set_inventory(inventory_array)
-		slug.connect("shoot_projectile", spawn_projectile)
-	
+	teams[0].set_spawn_points($GreenSpawnPoints.get_children())
+	teams[1].set_spawn_points($RedSpawnPoints.get_children())
+	initialise_teams()
+	#inventory_resource.initialise_inventory()
+	#inventory_array = inventory_resource.get_inventory()
+	#for piece in terrain.get_children():
+		#piece.connect("new_terrain", spawn_new_terrain)
+	#for slug: Slug in  $Slugs.get_children():
+		#if slug.name == "Slug":
+			#slug.begin_turn()
+		#slug.set_inventory(inventory_resource)
+		#slug.connect("shoot_projectile", spawn_projectile)
+
 func _process(_delta: float) -> void:
 	pass
+
+func initialise_teams() -> void:
+	for team in teams:
+		team.team_inventory.initialise_inventory()
+		for i in range(slugs_per_team):
+			var slug: Slug = slug_scene.instantiate()
+			slug.position = team.spawn_points[i].position
+			slug.set_inventory(team.team_inventory)
+			slug.connect("shoot_projectile", spawn_projectile)
+			slug.set_team(team)
+			team.add_slug(slug)
+			$Slugs.add_child(slug)
+	active_slug = teams[0].slugs[0]
+	active_slug.begin_turn()
 
 func spawn_rocket(spawn_pos: Vector2) -> void:
 	var rocket: Rocket = rocket_scene.instantiate()
@@ -31,7 +58,7 @@ func spawn_projectile(projectile: PackedScene, start_position: Vector2, directio
 		new_projectile.set_initial_force(direction)
 	else:
 		new_projectile.set_direction(direction)
-		new_projectile.set_shooter(shooter)
+	new_projectile.set_shooter(shooter)
 	$Projectiles.add_child(new_projectile)
 
 func spawn_new_terrain(visual_poly: Array, _new_position: Vector2, terrain_color: Color) -> void:

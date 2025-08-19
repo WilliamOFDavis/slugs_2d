@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Team" load_steps=3 format=3 uid="uid://xsk4ndfhajg"]
+
+[ext_resource type="Script" uid="uid://by7syyhtd4gnb" path="res://Resources/team.gd" id="1_kxc1t"]
+[ext_resource type="Resource" uid="uid://t1lhhkma21k4" path="res://Resources/blue_inventory.tres" id="2_n4c8d"]
+
+[resource]
+script = ExtResource("1_kxc1t")
+team_name = "Blue"
+team_color = Color(0, 0.639216, 1, 1)
+team_inventory = ExtResource("2_n4c8d")
+metadata/_custom_type_script = "uid://by7syyhtd4gnb"

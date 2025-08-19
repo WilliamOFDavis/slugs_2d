@@ -30,4 +30,4 @@ func explode() -> void:
 				body.terrain_explosion(explosion_radius)
 			elif body is Slug:
 				var direction_to_body: Vector2 = ( body.global_position -  get_parent().global_position).normalized()
-				body.hit(damage, direction_to_body)
+				body.hit(shooter, damage, direction_to_body)

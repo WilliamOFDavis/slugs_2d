@@ -1,0 +1,20 @@
+extends Resource
+
+class_name Team
+
+@export var team_name: String
+@export var team_color: Color
+@export var team_inventory: Inventory
+var spawn_points: Array[Node]
+var slugs: Array[Slug]
+var slug_index: int = 0
+
+func set_spawn_points(points: Array[Node]) -> void:
+	spawn_points = points
+
+func add_slug(slug: Slug) -> void:
+	slugs.append(slug)
+
+func remove_slug(slug: Slug) -> void:
+	slugs.erase(slug)
+	slug_index -= 1

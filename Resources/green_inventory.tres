@@ -9,5 +9,5 @@
 
 [resource]
 script = ExtResource("1_1xcnw")
-weapons = Array[ExtResource("2_yvmwt")]([ExtResource("3_yvmwt"), ExtResource("4_ou56e"), ExtResource("5_vlisp"), ExtResource("5_vlisp"), ExtResource("3_yvmwt"), ExtResource("4_ou56e"), ExtResource("6_wd4dp")])
+weapons = Array[ExtResource("2_yvmwt")]([ExtResource("3_yvmwt"), ExtResource("5_vlisp"), ExtResource("3_yvmwt"), ExtResource("4_ou56e"), ExtResource("6_wd4dp")])
 metadata/_custom_type_script = "uid://bb1rxy30vmqei"

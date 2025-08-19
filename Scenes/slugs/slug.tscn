@@ -1,7 +1,8 @@
-[gd_scene load_steps=29 format=3 uid="uid://b5vhx7wv1nesu"]
+[gd_scene load_steps=31 format=3 uid="uid://b5vhx7wv1nesu"]
 
 [ext_resource type="Script" uid="uid://bdpej2kfuy5pv" path="res://Scenes/slugs/slug.gd" id="1_f0h22"]
 [ext_resource type="Texture2D" uid="uid://dq1am2jl6abm" path="res://Graphics/slug_walk.png" id="1_piqcb"]
+[ext_resource type="Shader" uid="uid://b00p4jyilbrkd" path="res://shaders/slug_team_shader.gdshader" id="2_2reqc"]
 [ext_resource type="Texture2D" uid="uid://8yh07tfelv0" path="res://Graphics/slug_idle.png" id="2_kq1qn"]
 [ext_resource type="Texture2D" uid="uid://o13ko2ii1c61" path="res://Graphics/slug_jump.png" id="2_lqw8j"]
 [ext_resource type="Script" uid="uid://bbhjp07u6ryqy" path="res://Scenes/slugs/state_machine.gd" id="4_qqoxf"]
@@ -9,6 +10,12 @@
 [ext_resource type="PackedScene" uid="uid://c6dhabdxnl0n7" path="res://components/input_component.tscn" id="6_bahlg"]
 [ext_resource type="PackedScene" uid="uid://b5id72leyiy8o" path="res://components/velocity_component.tscn" id="7_0eabb"]
 [ext_resource type="Script" uid="uid://c382ophhlvgsn" path="res://Scenes/slugs/weapon_sprite.gd" id="9_2reqc"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r26y6"]
+shader = ExtResource("2_2reqc")
+shader_parameter/team_color = Color(1, 0, 0, 1)
+shader_parameter/skin_color = Color(0.6, 0.898, 0.314, 1)
+shader_parameter/color_tolerance = 0.1
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r26y6"]
 atlas = ExtResource("2_kq1qn")
@@ -160,6 +167,7 @@ floor_max_angle = 0.912807
 script = ExtResource("1_f0h22")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_r26y6")
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_kq1qn")
 animation = &"in_air"
@@ -168,6 +176,7 @@ frame_progress = 1.0
 speed_scale = 2.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
+enabled = false
 script = ExtResource("5_2reqc")
 zoomed_scale = Vector2(1.2, 1.2)
 
@@ -197,5 +206,13 @@ script = ExtResource("9_2reqc")
 [node name="AirborneTimer" type="Timer" parent="."]
 wait_time = 0.2
 one_shot = true
+
+[node name="ColorPicker" type="ColorPicker" parent="."]
+visible = false
+offset_left = 155.0
+offset_top = -321.0
+offset_right = 453.0
+offset_bottom = 251.0
+color = Color(0.6, 0.898039, 0.313726, 1)
 
 [connection signal="switch_weapon" from="InputComponent" to="." method="_on_input_component_switch_weapon"]
