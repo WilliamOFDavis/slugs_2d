@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://b5vhx7wv1nesu"]
+[gd_scene load_steps=32 format=3 uid="uid://b5vhx7wv1nesu"]
 
 [ext_resource type="Script" uid="uid://bdpej2kfuy5pv" path="res://Scenes/slugs/slug.gd" id="1_f0h22"]
 [ext_resource type="Texture2D" uid="uid://dq1am2jl6abm" path="res://Graphics/slug_walk.png" id="1_piqcb"]
@@ -161,6 +161,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2reqc"]
+size = Vector2(26, 32)
+
 [node name="Slug" type="CharacterBody2D"]
 floor_constant_speed = true
 floor_max_angle = 0.912807
@@ -170,9 +173,7 @@ script = ExtResource("1_f0h22")
 material = SubResource("ShaderMaterial_r26y6")
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_kq1qn")
-animation = &"in_air"
-frame = 11
-frame_progress = 1.0
+animation = &"idle"
 speed_scale = 2.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -196,9 +197,6 @@ mult_label = NodePath("../ForceMult")
 [node name="VelocityComponent" parent="." node_paths=PackedStringArray("slug_state_machine", "sprite") instance=ExtResource("7_0eabb")]
 slug_state_machine = NodePath("../SlugStateMachine")
 sprite = NodePath("../AnimatedSprite2D")
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(-14, 30, 14, 30, 14, 2, 5, 2, 0, 6, -1, 20, -14, 26)
 
 [node name="WeaponSprite" type="Sprite2D" parent="."]
 position = Vector2(0, 16)
@@ -226,5 +224,15 @@ text = "1.0"
 [node name="EndTurnTimer" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3, 16)
+shape = SubResource("RectangleShape2D_2reqc")
+
+[node name="Health" type="Label" parent="."]
+offset_left = -20.0
+offset_top = -44.0
+offset_right = 20.0
+offset_bottom = -21.0
 
 [connection signal="switch_weapon" from="InputComponent" to="." method="_on_input_component_switch_weapon"]

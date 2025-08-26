@@ -97,7 +97,9 @@ func death() -> void:
 func _physics_process(_delta: float) -> void:
 	velocity = velocity_component.get_velocity()
 	move_and_slide()
-	
+
+func _process(delta: float) -> void:
+	$Health.text = str(health)
 
 func _on_input_component_switch_weapon() -> void:
 	switch_weapon()

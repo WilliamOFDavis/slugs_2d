@@ -48,9 +48,12 @@ func initialise_teams() -> void:
 	active_team_index += 1
 	active_slug.begin_turn()
 
-func end_turn(triggered:bool = false) -> void:
+
+func deactivate_slug() -> void:
 	if active_slug != null:
 		active_slug.end_turn()
+
+func end_turn(triggered:bool = false) -> void:
 	if !triggered:
 		$EndTurnTimer.start()
 	else:
@@ -75,10 +78,10 @@ func spawn_projectile(projectile: PackedScene, start_position: Vector2, directio
 	else:
 		new_projectile.set_direction(direction, multiplier)
 	new_projectile.set_shooter(shooter)
+	new_projectile.connect("explosion", end_turn)
+	deactivate_slug()
 	$Projectiles.add_child(new_projectile)
-	$EndTurnTimer.wait_time = 2.5*multiplier
-	end_turn()
-
+	
 func spawn_new_terrain(visual_poly: Array, _new_position: Vector2, terrain_color: Color) -> void:
 	var new_visual_polygon: Polygon2D = Polygon2D.new()
 	var new_terrain_piece: TerrainPiece = terrain_piece_scene.instantiate()

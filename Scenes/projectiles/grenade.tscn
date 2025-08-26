@@ -10,9 +10,10 @@ bounce = 0.45
 [sub_resource type="CircleShape2D" id="CircleShape2D_eh0hm"]
 radius = 8.06226
 
-[node name="Grenade" type="RigidBody2D"]
+[node name="Grenade" type="RigidBody2D" node_paths=PackedStringArray("detonation_timer")]
 physics_material_override = SubResource("PhysicsMaterial_820vn")
 script = ExtResource("1_eh0hm")
+detonation_timer = NodePath("DetonationTimer")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_r446a")
@@ -28,5 +29,3 @@ polygon = PackedVector2Array(-93, -63, -81, -78, -59, -95, -38, -101, -10, -102,
 
 [node name="DetonationTimer" type="Timer" parent="."]
 wait_time = 4.0
-
-[connection signal="timeout" from="DetonationTimer" to="." method="_on_detonation_timer_timeout"]
