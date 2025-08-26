@@ -7,7 +7,7 @@
 [node name="Rocket" type="Node2D" node_paths=PackedStringArray("collision_area")]
 script = ExtResource("1_5gt1y")
 collision_area = NodePath("Area2D")
-speed = 200.0
+speed = 300.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 1
@@ -21,6 +21,7 @@ texture = ExtResource("2_q8xow")
 polygon = PackedVector2Array(-4, -4, -2, -4, -2, -5, 2, -5, 2, -4, 4, -4, 4, -3, 5, -3, 5, -2, 6, -2, 6, 0, 7, 0, 7, 5, 6, 5, 6, 7, 5, 7, 5, 8, -5, 8, -5, 7, -6, 7, -6, 5, -7, 5, -7, 0, -6, 0, -6, -2, -5, -2, -5, -3, -4, -3)
 
 [node name="ExplosionRadiusComponent" parent="." instance=ExtResource("3_qtlfm")]
+damage = 75
 
 [node name="ExplosionRadius" type="CollisionPolygon2D" parent="ExplosionRadiusComponent"]
 polygon = PackedVector2Array(0, -81, -34, -75, -73, -58, -92, -27, -98, 13, -87, 55, -65, 87, -20, 101, 1, 99, 38, 102, 83, 81, 95, 48, 98, 6, 96, -22, 75, -61, 22, -79)

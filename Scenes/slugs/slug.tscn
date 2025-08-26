@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://b5vhx7wv1nesu"]
+[gd_scene load_steps=33 format=3 uid="uid://b5vhx7wv1nesu"]
 
 [ext_resource type="Script" uid="uid://bdpej2kfuy5pv" path="res://Scenes/slugs/slug.gd" id="1_f0h22"]
 [ext_resource type="Texture2D" uid="uid://dq1am2jl6abm" path="res://Graphics/slug_walk.png" id="1_piqcb"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://c6dhabdxnl0n7" path="res://components/input_component.tscn" id="6_bahlg"]
 [ext_resource type="PackedScene" uid="uid://b5id72leyiy8o" path="res://components/velocity_component.tscn" id="7_0eabb"]
 [ext_resource type="Script" uid="uid://c382ophhlvgsn" path="res://Scenes/slugs/weapon_sprite.gd" id="9_2reqc"]
+[ext_resource type="PackedScene" uid="uid://dpunkf387mlng" path="res://components/explosion_radius_component.tscn" id="11_r26y6"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_r26y6"]
 shader = ExtResource("2_2reqc")
@@ -165,6 +166,7 @@ animations = [{
 size = Vector2(26, 32)
 
 [node name="Slug" type="CharacterBody2D"]
+collision_layer = 2
 floor_constant_speed = true
 floor_max_angle = 0.912807
 script = ExtResource("1_f0h22")
@@ -179,7 +181,7 @@ speed_scale = 2.0
 [node name="Camera2D" type="Camera2D" parent="."]
 enabled = false
 script = ExtResource("5_2reqc")
-zoomed_scale = Vector2(2, 2)
+zoomed_out_scale = Vector2(0.6, 0.6)
 
 [node name="SlugStateMachine" type="Node" parent="." node_paths=PackedStringArray("sprite", "velocity_component", "airborne_timer")]
 script = ExtResource("4_qqoxf")
@@ -206,14 +208,6 @@ script = ExtResource("9_2reqc")
 wait_time = 0.2
 one_shot = true
 
-[node name="ColorPicker" type="ColorPicker" parent="."]
-visible = false
-offset_left = 155.0
-offset_top = -321.0
-offset_right = 453.0
-offset_bottom = 251.0
-color = Color(0.6, 0.898039, 0.313726, 1)
-
 [node name="ForceMult" type="Label" parent="."]
 offset_left = -20.0
 offset_top = -25.0
@@ -234,5 +228,11 @@ offset_left = -20.0
 offset_top = -44.0
 offset_right = 20.0
 offset_bottom = -21.0
+
+[node name="ExplosionRadiusComponent" parent="." instance=ExtResource("11_r26y6")]
+
+[node name="ExplosionRadius" type="CollisionPolygon2D" parent="ExplosionRadiusComponent"]
+position = Vector2(-2, 13)
+polygon = PackedVector2Array(-93, -63, -81, -78, -59, -95, -38, -101, -10, -102, 18, -100, 57, -94, 87, -73, 112, -45, 120, -7, 119, 23, 103, 54, 64, 79, 24, 86, -13, 86, -51, 78, -85, 66, -100, 12, -102, -14, -102, -44)
 
 [connection signal="switch_weapon" from="InputComponent" to="." method="_on_input_component_switch_weapon"]

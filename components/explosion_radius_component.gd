@@ -10,6 +10,8 @@ var shooter: Slug
 
 func _ready() -> void:
 	explosion_radius = get_node("ExplosionRadius")
+	if get_parent() is Slug:
+		shooter = get_parent()
 	connect("body_entered", _body_entered)
 	connect("body_exited", _body_exited)
 

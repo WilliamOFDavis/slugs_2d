@@ -15,7 +15,6 @@ var active_turn: bool = false
 var health: int = 100: 
 	set(new_health):
 		if new_health <= 0: 
-			health = 100
 			death()
 		else:
 			health = new_health
@@ -26,6 +25,8 @@ var health: int = 100:
 
 signal turn_over
 signal shoot_projectile(projectile, start_position, direction, shooter)
+signal dead(slug)
+
 
 func _ready() -> void:
 	$InputComponent.connect("shoot_weapon", shoot_weap)
@@ -92,7 +93,11 @@ func hit(shooter: Slug, damage:int = 0, knockback_direction: Vector2 = Vector2.Z
 		velocity_component.knock_back(knockback_direction)
 	
 func death() -> void:
-	position = Vector2(0,-1000)
+	dead.emit(self)
+
+func explode() -> void:
+	$ExplosionRadiusComponent.explode()
+	self.queue_free()
 
 func _physics_process(_delta: float) -> void:
 	velocity = velocity_component.get_velocity()

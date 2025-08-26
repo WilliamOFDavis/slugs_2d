@@ -14,6 +14,7 @@ var slug_scene: PackedScene = preload("res://Scenes/slugs/slug.tscn")
 
 @export var slugs_per_team: int = 5
 @onready var terrain = $Terrain
+@onready var hud: PlayerHud = $PlayerHud
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	teams[0].set_spawn_points($GreenSpawnPoints.get_children())
@@ -41,9 +42,11 @@ func initialise_teams() -> void:
 			slug.position = team.spawn_points[i].position
 			slug.set_inventory(team.team_inventory)
 			slug.connect("shoot_projectile", spawn_projectile)
+			slug.connect("dead", on_slug_death)
 			slug.set_team(team)
 			team.add_slug(slug)
 			$Slugs.add_child(slug)
+	hud.setup_team_display(teams)
 	active_slug = teams[0].get_next_slug()
 	active_team_index += 1
 	active_slug.begin_turn()
@@ -53,13 +56,16 @@ func deactivate_slug() -> void:
 	if active_slug != null:
 		active_slug.end_turn()
 
-func end_turn(triggered:bool = false) -> void:
-	if !triggered:
-		$EndTurnTimer.start()
-	else:
-		goto_next_turn()
+func end_turn(triggered: bool = false) -> void:
+	#if !triggered:
+	if triggered:
+		deactivate_slug()
+	$EndTurnTimer.start()
+	#else:
+		#goto_next_turn()
 func goto_next_turn() -> void:
-	active_slug.deactivate_camera()
+	if active_slug != null:
+		active_slug.deactivate_camera()
 	active_slug = teams[active_team_index%teams.size()].get_next_slug()
 	active_slug.begin_turn()
 	active_team_index += 1
@@ -92,3 +98,8 @@ func spawn_new_terrain(visual_poly: Array, _new_position: Vector2, terrain_color
 	terrain.add_child(new_terrain_piece)
 	new_terrain_piece.set_visual_polygon(new_visual_polygon)
 	new_terrain_piece.set_color(terrain_color)
+
+func on_slug_death(slug: Slug) -> void:
+	slug.current_team.remove_slug(slug)
+	if slug == active_slug:
+		goto_next_turn()

@@ -3,4 +3,6 @@
 [ext_resource type="Script" uid="uid://db61esdifkd7k" path="res://components/explosion_radius_component.gd" id="1_rf4ir"]
 
 [node name="ExplosionRadiusComponent" type="Area2D"]
+collision_layer = 4
+collision_mask = 3
 script = ExtResource("1_rf4ir")

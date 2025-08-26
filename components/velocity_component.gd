@@ -48,8 +48,8 @@ func _physics_process(delta: float) -> void:
 	
 	knockback_velocity = knockback_velocity.lerp(Vector2.ZERO, knockback_decay)
 	
-	if velocity.x > 0:
-		print("Velocity: ", velocity, " Knockback: ", knockback_velocity)
+	#if velocity.x > 0:
+		#print("Velocity: ", velocity, " Knockback: ", knockback_velocity)
 	if direction.x == 0.0:
 		velocity.x = lerp(velocity.x, 0.0, 0.1)
 
