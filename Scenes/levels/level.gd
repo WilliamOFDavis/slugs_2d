@@ -102,6 +102,9 @@ func spawn_new_terrain(visual_poly: Array, _new_position: Vector2, terrain_color
 	new_terrain_piece.set_color(terrain_color)
 
 func on_slug_death(slug: Slug) -> void:
-	slug.current_team.remove_slug(slug)
 	if slug == active_slug:
 		goto_next_turn()
+	if !$EndTurnTimer.is_stopped():
+		$EndTurnTimer.stop()
+	slug.current_team.remove_slug(slug)
+	

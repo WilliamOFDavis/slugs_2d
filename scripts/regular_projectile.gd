@@ -28,7 +28,7 @@ func set_shooter(slug:Slug) -> void:
 	
 func set_direction(new_direction: Vector2, multiplier: float = 1.0) -> void:
 	direction = new_direction
-	velocity = direction * speed
+	velocity = direction * speed * multiplier
 
 
 

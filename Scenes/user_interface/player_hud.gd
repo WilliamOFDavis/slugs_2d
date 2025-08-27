@@ -25,10 +25,7 @@ func draw_team_display() -> void:
 			slug_texture_rect.texture = load("res://Graphics/slug.png")
 			slug_texture_rect.material = slug_shader
 			slugs_display.add_child(slug_texture_rect)
-	if active_slug != null:
-		if active_slug.current_weapon != null:
-			$MarginContainer/VBoxContainer/HSplitContainer/AmmoTexture.texture = active_slug.current_weapon.weapon_texture
-			$MarginContainer/VBoxContainer/HSplitContainer/AmmoTexture/AmmoLabel.text = str(active_slug.current_weapon.current_ammo)
+
 
 func draw_current_inventory() -> void:
 	for button: Button in $MarginContainer/InventoryToolbar.get_children():
@@ -55,12 +52,16 @@ func set_active_slug(slug: Slug) -> void:
 	active_slug = slug
 	set_inventory(slug.current_inventory)
 
-func draw_hud(active_slug: Slug) -> void:
-	pass
+func draw_hud() -> void:
+	if active_slug != null:
+		$MarginContainer/VBoxContainer/HSplitContainer/HitPointsLabel.value = float(active_slug.health)
+		if active_slug.current_weapon != null:
+			$MarginContainer/VBoxContainer/HSplitContainer/AmmoTexture.texture = active_slug.current_weapon.weapon_texture
+			$MarginContainer/VBoxContainer/HSplitContainer/AmmoTexture/AmmoLabel.text = str(active_slug.current_weapon.current_ammo)
 
 func _process(delta: float) -> void:
 	draw_team_display()
-
+	draw_hud()
 
 func on_button_press(button: Button) -> void:
 	var selected_weapon: Weapon = inventory_dictionary[button]
