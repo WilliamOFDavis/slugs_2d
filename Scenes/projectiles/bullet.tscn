@@ -21,6 +21,7 @@ position = Vector2(-1, 0)
 polygon = PackedVector2Array(-30, -11, -22, -23, -7, -30, 9, -30, 26, -24, 33, -11, 36, 2, 33, 12, 24, 22, 10, 29, 1, 31, -7, 29, -21, 23, -30, 12, -33, 0)
 
 [node name="CollisionArea" type="Area2D" parent="."]
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionArea"]
 shape = SubResource("RectangleShape2D_abbnw")

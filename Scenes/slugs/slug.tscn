@@ -163,7 +163,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2reqc"]
-size = Vector2(26, 32)
+size = Vector2(58, 64)
 
 [node name="Slug" type="CharacterBody2D"]
 collision_layer = 2
@@ -173,7 +173,7 @@ script = ExtResource("1_f0h22")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_r26y6")
-scale = Vector2(2, 2)
+scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_kq1qn")
 animation = &"idle"
 speed_scale = 2.0
@@ -181,7 +181,7 @@ speed_scale = 2.0
 [node name="Camera2D" type="Camera2D" parent="."]
 enabled = false
 script = ExtResource("5_2reqc")
-zoomed_out_scale = Vector2(0.6, 0.6)
+zoomed_out_scale = Vector2(0.4, 0.4)
 
 [node name="SlugStateMachine" type="Node" parent="." node_paths=PackedStringArray("sprite", "velocity_component", "airborne_timer")]
 script = ExtResource("4_qqoxf")
@@ -201,7 +201,8 @@ slug_state_machine = NodePath("../SlugStateMachine")
 sprite = NodePath("../AnimatedSprite2D")
 
 [node name="WeaponSprite" type="Sprite2D" parent="."]
-position = Vector2(0, 16)
+position = Vector2(0, 32)
+scale = Vector2(2, 2)
 script = ExtResource("9_2reqc")
 
 [node name="AirborneTimer" type="Timer" parent="."]
@@ -220,7 +221,7 @@ wait_time = 2.0
 one_shot = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(3, 16)
+position = Vector2(3, 32)
 shape = SubResource("RectangleShape2D_2reqc")
 
 [node name="Health" type="Label" parent="."]

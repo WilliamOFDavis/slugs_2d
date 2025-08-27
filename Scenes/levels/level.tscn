@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bw7hmsl1we3i2" path="res://Scenes/user_interface/player_hud.tscn" id="6_h6uxn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5e0y8"]
-size = Vector2(6338, 170)
+size = Vector2(6596, 431)
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_u52ul")
@@ -24,7 +24,7 @@ visual_polygon = NodePath("Polygon2D")
 
 [node name="Polygon2D" type="Polygon2D" parent="Terrain/TerrainPiece2"]
 color = Color(1, 0.396078, 0, 1)
-polygon = PackedVector2Array(626, -659, 771, -517, 1147, -399, 1470, -559, 1565, -657)
+polygon = PackedVector2Array(626, -659, 771, -517, 1147, -399, 1470, -559, 1565, -657, 1290, -639, 1056, -699, 884, -627)
 
 [node name="TerrainPiece" parent="Terrain" node_paths=PackedStringArray("visual_polygon") instance=ExtResource("3_oi3di")]
 visual_polygon = NodePath("TerrainPoly")
@@ -32,24 +32,24 @@ visual_polygon = NodePath("TerrainPoly")
 [node name="TerrainPoly" type="Polygon2D" parent="Terrain/TerrainPiece"]
 position = Vector2(43, -4)
 color = Color(0.763743, 0.64334, 0.235081, 1)
-polygon = PackedVector2Array(-31, 1, -147, 275, -4218, 250, -4232, 711, 4425, 714, 4444, 278, 1883, 219, 1658, -3, 633, -259, 196, -3)
+polygon = PackedVector2Array(-31, 1, -617, 69, -863, 334, -4218, 250, -4276, 1212, 4431, 1162, 4444, 278, 2668, 312, 2421, 8, 1658, -3, 1000, 26, 634, -144, 196, -3)
 
 [node name="TerrainPiece3" parent="Terrain" node_paths=PackedStringArray("visual_polygon") instance=ExtResource("3_oi3di")]
 visual_polygon = NodePath("Polygon2D")
 
 [node name="Polygon2D" type="Polygon2D" parent="Terrain/TerrainPiece3"]
 color = Color(1, 0.470588, 0.215686, 1)
-polygon = PackedVector2Array(-82, -733, -356, -607, -321, -434, -108, -638, 46, -641, 169, -419, 316, -783, 125, -733)
+polygon = PackedVector2Array(-160, -761, -356, -607, -321, -434, -108, -638, 46, -641, 169, -419, 316, -783, 125, -733)
 
 [node name="Slugs" type="Node2D" parent="."]
 
 [node name="GreenSpawnPoints" type="Node2D" parent="."]
 
 [node name="Marker2D" type="Marker2D" parent="GreenSpawnPoints"]
-position = Vector2(975, -280)
+position = Vector2(-354, -7)
 
 [node name="Marker2D2" type="Marker2D" parent="GreenSpawnPoints"]
-position = Vector2(1247, -148)
+position = Vector2(2272, -51)
 
 [node name="Marker2D3" type="Marker2D" parent="GreenSpawnPoints"]
 position = Vector2(446, -186)
@@ -66,7 +66,7 @@ position = Vector2(-116, -804)
 position = Vector2(193, -795)
 
 [node name="Marker2D7" type="Marker2D" parent="RedSpawnPoints"]
-position = Vector2(1153, -682)
+position = Vector2(973, -168)
 
 [node name="Marker2D8" type="Marker2D" parent="RedSpawnPoints"]
 position = Vector2(1431, -692)
@@ -85,14 +85,14 @@ one_shot = true
 [node name="Sea" type="Sprite2D" parent="Water"]
 z_index = 1
 texture_repeat = 2
-position = Vector2(-236, 346)
-scale = Vector2(18.86, 1)
+position = Vector2(-236, 631.5)
+scale = Vector2(18.86, 2.142)
 texture = ExtResource("3_d6e32")
 
 [node name="SlugKillAreaComponent" parent="Water" instance=ExtResource("4_5pa0r")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Water/SlugKillAreaComponent"]
-position = Vector2(1312, 182)
+position = Vector2(1183, 312.5)
 shape = SubResource("RectangleShape2D_5e0y8")
 
 [node name="Sky" type="Sprite2D" parent="."]
