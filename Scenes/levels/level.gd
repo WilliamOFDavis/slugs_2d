@@ -48,6 +48,7 @@ func initialise_teams() -> void:
 			$Slugs.add_child(slug)
 	hud.setup_team_display(teams)
 	active_slug = teams[0].get_next_slug()
+	hud.set_active_slug(active_slug)
 	active_team_index += 1
 	active_slug.begin_turn()
 
@@ -67,6 +68,7 @@ func goto_next_turn() -> void:
 	if active_slug != null:
 		active_slug.deactivate_camera()
 	active_slug = teams[active_team_index%teams.size()].get_next_slug()
+	hud.set_active_slug(active_slug)
 	active_slug.begin_turn()
 	active_team_index += 1
 	$EndTurnTimer.wait_time = 1.0
