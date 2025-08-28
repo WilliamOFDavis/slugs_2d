@@ -54,7 +54,8 @@ func set_active_slug(slug: Slug) -> void:
 
 func draw_hud() -> void:
 	if active_slug != null:
-		$MarginContainer/VBoxContainer/HSplitContainer/HitPointsLabel.value = float(active_slug.health)
+		$MarginContainer/VBoxContainer/HSplitContainer/HitPointsBar.value = float(active_slug.health)
+		$MarginContainer/VBoxContainer/HSplitContainer/HitPointsBar/HitPointsLabel.text = "%s/%s" % [str(active_slug.health), "100"]
 		if active_slug.current_weapon != null:
 			$MarginContainer/VBoxContainer/HSplitContainer/AmmoTexture.texture = active_slug.current_weapon.weapon_texture
 			$MarginContainer/VBoxContainer/HSplitContainer/AmmoTexture/AmmoLabel.text = str(active_slug.current_weapon.current_ammo)

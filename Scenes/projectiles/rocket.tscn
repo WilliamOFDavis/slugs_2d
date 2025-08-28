@@ -7,7 +7,7 @@
 [node name="Rocket" type="Node2D" node_paths=PackedStringArray("collision_area")]
 script = ExtResource("1_5gt1y")
 collision_area = NodePath("Area2D")
-speed = 100.0
+speed = 200.0
 gravity = 300.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

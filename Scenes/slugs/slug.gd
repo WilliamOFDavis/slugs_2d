@@ -1,7 +1,7 @@
+
+
 extends CharacterBody2D
-
 class_name Slug
-
 var jumping = false
 var gravity: float = 50.0
 var is_zooming_out: bool = false
@@ -12,9 +12,10 @@ var current_team: Team
 var current_inventory: Inventory
 var weapon_index: int = 0
 var active_turn: bool = false
+var is_dying: bool = false 
 var health: int = 100: 
 	set(new_health):
-		if new_health <= 0: 
+		if new_health <= 0 and not is_dying: 
 			death()
 		else:
 			health = new_health
@@ -22,11 +23,9 @@ var health: int = 100:
 @onready var camera: Camera2D = $Camera2D
 @onready var velocity_component: VelocityComponent = $VelocityComponent
 # Called when the node enters the scene tree for the first time.
-
 signal turn_over
 signal shoot_projectile(projectile, start_position, direction, shooter)
 signal dead(slug)
-
 
 func _ready() -> void:
 	$InputComponent.connect("shoot_weapon", shoot_weap)
@@ -43,7 +42,6 @@ func activate_slug() -> void:
 
 func deactivate_slug() -> void:
 	active_turn = false
-
 
 func deactivate_camera() -> void:
 	camera.enabled = false
@@ -86,25 +84,33 @@ func shoot_weap(direction_to_mouse: Vector2, multiplier: float) -> void:
 		weapon_index -= 1
 		switch_weapon()
 		
-
 func hit(shooter: Slug, damage:int = 0, knockback_direction: Vector2 = Vector2.ZERO):
-	if shooter.current_team != current_team:
-		health -= damage
-		velocity_component.knock_back(knockback_direction)
+	if is_dying:
+		return
+		
+	#if shooter.current_team != current_team:
+	health -= damage
+	velocity_component.knock_back(knockback_direction)
 	
 func death() -> void:
+	if is_dying:  
+		return
+	is_dying = true
 	dead.emit(self)
+	explode()
 
 func explode() -> void:
-	$ExplosionRadiusComponent.explode()
+	$ExplosionRadiusComponent.explode(true)
 	self.queue_free()
 
 func _physics_process(_delta: float) -> void:
-	velocity = velocity_component.get_velocity()
-	move_and_slide()
+	if not is_dying:  
+		velocity = velocity_component.get_velocity()
+		move_and_slide()
 
 func _process(delta: float) -> void:
-	$Health.text = str(health)
+	if not is_dying:  
+		$Health.text = str(health)
 
 func _on_input_component_switch_weapon() -> void:
 	switch_weapon()

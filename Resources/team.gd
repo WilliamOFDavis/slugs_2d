@@ -15,9 +15,10 @@ func set_spawn_points(points: Array[Node]) -> void:
 func add_slug(slug: Slug) -> void:
 	slugs.append(slug)
 
-func remove_slug(slug: Slug) -> void:
+func remove_slug(slug: Slug, death: bool = false) -> void:
 	slugs.erase(slug)
-	slug.explode()
+	if !death: 
+		slug.death()
 	slug_index -= 1
 
 func get_remaining_slug_count() -> int:

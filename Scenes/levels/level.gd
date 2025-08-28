@@ -106,5 +106,5 @@ func on_slug_death(slug: Slug) -> void:
 		goto_next_turn()
 	if !$EndTurnTimer.is_stopped():
 		$EndTurnTimer.stop()
-	slug.current_team.remove_slug(slug)
+	slug.current_team.remove_slug(slug, true)
 	

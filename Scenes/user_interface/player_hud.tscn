@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bw7hmsl1we3i2"]
+[gd_scene load_steps=9 format=3 uid="uid://bw7hmsl1we3i2"]
 
 [ext_resource type="Script" uid="uid://cj0qk8ijxvgwk" path="res://Scenes/user_interface/player_hud.gd" id="1_8yskw"]
 [ext_resource type="Texture2D" uid="uid://syhlqwj7whvd" path="res://Graphics/slug.png" id="2_7ddte"]
@@ -21,6 +21,10 @@ border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_hakws"]
+font_size = 20
+font_color = Color(0, 0.278431, 0, 1)
 
 [node name="PlayerHud" type="CanvasLayer"]
 script = ExtResource("1_8yskw")
@@ -91,13 +95,25 @@ texture = ExtResource("2_7ddte")
 layout_mode = 2
 dragging_enabled = false
 
-[node name="HitPointsLabel" type="ProgressBar" parent="MarginContainer/VBoxContainer/HSplitContainer"]
+[node name="HitPointsBar" type="ProgressBar" parent="MarginContainer/VBoxContainer/HSplitContainer"]
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_styles/background = SubResource("StyleBoxFlat_hakws")
 theme_override_styles/fill = SubResource("StyleBoxFlat_wk21n")
 show_percentage = false
+
+[node name="HitPointsLabel" type="Label" parent="MarginContainer/VBoxContainer/HSplitContainer/HitPointsBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "100/100"
+label_settings = SubResource("LabelSettings_hakws")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="AmmoTexture" type="TextureRect" parent="MarginContainer/VBoxContainer/HSplitContainer"]
 custom_minimum_size = Vector2(64, 32)
